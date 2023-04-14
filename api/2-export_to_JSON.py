@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 """
-Using what you did in the task #0, extend your Python script to export data in the JSON format.
+Using what you did in the task #0, extend your
+Python script to export data in the JSON format.
 """
-
-
-import requests
 import json
-import sys
-
+import requests
+import sys  
 EMPLOYEE_ID = sys.argv[1]
 
 # make the API call to get employee information
