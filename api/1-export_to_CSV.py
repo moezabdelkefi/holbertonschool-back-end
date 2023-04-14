@@ -1,12 +1,7 @@
 #!/usr/bin/python3
-
-
 """
-Using the REST API from https://jsonplaceholder.typicode.com/,
-this Python script exports data in the CSV format for a given employee ID.
-The exported file contains all tasks that
-are owned by the employee in the format of
-"USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE".
+Using what you did in the task #0, extend your
+Python script to export data in the CSV format.
 """
 
 
