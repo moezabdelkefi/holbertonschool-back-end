@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 
-"""
-This script retrieves information about a given employee's TODO list progress from a REST API.
-It takes an integer employee ID as a command line argument and prints the progress information to the console.
-It also exports the employee's TODO list to a CSV file with the format "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE".
-"""
+"""extend your Python script to export data in the CSV format"""
 
 import requests
 import csv
