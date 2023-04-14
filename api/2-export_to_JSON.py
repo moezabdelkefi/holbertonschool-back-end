@@ -1,42 +1,28 @@
 #!/usr/bin/python3
-"""
-Using what you did in the task #0, extend your
-Python script to export data in the JSON format.
-"""
+"""Using what you did in the task #0
+ extend your Python script
+ to export data in the JSON format."""
+
 import json
 import requests
 import sys
+
 if __name__ == '__main__':
-    EMPLOYEE_ID = sys.argv[1]
+    user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
+    user_data = requests.get(url + "users/" + user_id).json()
+    todo_data = requests.get(url + "todos?userId=" + user_id).json()
 
-# make the API call to get employee information
-response = requests.get(f"https://jsonplaceholder.typicode.com/users/{EMPLOYEE_ID}")
-employee_data = response.json()
-employee_name = employee_data["username"]
+    tasks = []
+    for task in todo_data:
+        task_dict = {
+            "task": task["title"],
+            "completed": task["completed"],
+            "username": user_data["username"]
+        }
+        tasks.append(task_dict)
 
-# make the API call to get TODO list for the employee
-response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={EMPLOYEE_ID}")
-todo_list = response.json()
+    data = {user_id: tasks}
 
-tasks = []
-for task in todo_list:
-    task_dict = {"task": task['title'], "completed": task['completed'], "username": employee_name}
-    tasks.append(task_dict)
-
-json_data = {EMPLOYEE_ID: tasks}
-
-# write the JSON data to a file
-filename = f"{EMPLOYEE_ID}.json"
-with open(filename, mode='w') as json_file:
-    json.dump(json_data, json_file, indent=4)
-
-# count completed tasks
-completed_tasks = [todo for todo in todo_list if todo["completed"]]
-num_completed_tasks = len(completed_tasks)
-total_num_tasks = len(todo_list)
-
-print(f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_num_tasks}):")
-
-# print completed tasks
-for task in completed_tasks:
-    print(f"\t{task['title']}")
+    with open(user_id + '.json', 'w') as file:
+        json.dump(data, file)
