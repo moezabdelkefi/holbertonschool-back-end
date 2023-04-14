@@ -13,12 +13,10 @@ employee_name = employee_data["name"]
 response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={EMPLOYEE_ID}")
 todo_list = response.json()
 
-# count completed tasks
 completed_tasks = [todo for todo in todo_list if todo["completed"]]
 num_completed_tasks = len(completed_tasks)
 total_num_tasks = len(todo_list)
 
-# print employee TODO list progress
 print(f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_num_tasks}):")
 
 # print completed tasks
