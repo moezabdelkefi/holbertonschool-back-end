@@ -15,10 +15,10 @@ if __name__ == '__main__':
     todos = requests.get(
         'https://jsonplaceholder.typicode.com/todos?userId=' + t)
 
-    employee = response.json()
+    empl = response.json()
     todos = todos.json()
-    id = employee['id']
-    name = employee['username']
+    id = empl['id']
+    name = empl['username']
 
     with open(f'{t}.csv', 'w') as file:
         for i in todos:
