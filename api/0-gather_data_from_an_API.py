@@ -1,7 +1,12 @@
 #!/usr/bin/python3
+"""
+This script retrieves information about a given employee's TODO list progress from a REST API.
+It takes an integer employee ID as a command line argument and prints the progress information to the console.
+"""
+
 import requests
 import sys
-"""a Python script that, using this REST API, for a given employee ID, returns information about his/her TODO list progress"""
+
 EMPLOYEE_ID = sys.argv[1]
 
 # make the API call to get employee information
