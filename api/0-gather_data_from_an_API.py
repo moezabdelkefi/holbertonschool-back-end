@@ -1,32 +1,27 @@
 #!/usr/bin/python3
-
-"""
-This script retrieves information about a given employee's TODO list progress from a REST API.
-It takes an integer employee ID as a command line argument and prints the progress information to the console.
-"""
-
+"""Gathering the needed informations from the API."""
+import json
 import requests
-import sys
+from sys import argv
 
-EMPLOYEE_ID = sys.argv[1]
+if __name__ == '__main__':
+    resp_todos = requests.get('https://jsonplaceholder.typicode.com/todos/')
+    resp_users = requests.get('https://jsonplaceholder.typicode.com/users')
 
-# make the API call to get employee information
-response = requests.get(f"https://jsonplaceholder.typicode.com/users/{EMPLOYEE_ID}")
-employee_data = response.json()
-employee_name = employee_data["name"]
+    todos_count = 0
+    todos_done = 0
+    for i in resp_todos.json():
+        if i['userId'] == int(argv[1]):
+            todos_count = todos_count + 1
+            if i['completed'] is True:
+                todos_done = todos_done + 1
+    for i in resp_users.json():
+        if i['id'] == int(argv[1]):
+            emp = i['name']
 
-# make the API call to get TODO list for the employee
-response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={EMPLOYEE_ID}")
-todo_list = response.json()
+    print(f"Employee {emp} is done with tasks({todos_done}/{todos_count}):")
 
-# count completed tasks
-completed_tasks = [todo for todo in todo_list if todo["completed"]]
-num_completed_tasks = len(completed_tasks)
-total_num_tasks = len(todo_list)
-
-# print employee TODO list progress
-print(f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_num_tasks}):")
-
-# print completed tasks
-for task in completed_tasks:
-    print(f"\t{task['title']}")
+    for i in resp_todos.json():
+        if i['userId'] == int(argv[1]):
+            if i['completed'] is True:
+                print(f"\t {i['title']}")
