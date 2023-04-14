@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Gathering the needed informations from the API."""
-import json
 import requests
 import sys
 
@@ -11,7 +10,6 @@ response = requests.get(f"https://jsonplaceholder.typicode.com/users/{EMPLOYEE_I
 employee_data = response.json()
 employee_name = employee_data["name"]
 
-# make the API call to get TODO list for the employee
 response = requests.get(f"https://jsonplaceholder.typicode.com/todos?userId={EMPLOYEE_ID}")
 todo_list = response.json()
 
