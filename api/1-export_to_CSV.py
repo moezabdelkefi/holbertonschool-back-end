@@ -39,7 +39,6 @@ completed_tasks = [todo for todo in todo_list if todo["completed"]]
 num_completed_tasks = len(completed_tasks)
 total_num_tasks = len(todo_list)
 
-# print employee TODO list progress
 print(f"Employee {employee_name} is done with tasks ({num_completed_tasks}/{total_num_tasks}):")
 
 # print completed tasks
